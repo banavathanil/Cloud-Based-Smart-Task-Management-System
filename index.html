@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cloud-Based Smart Task Management System powered by Firebase.">
+  <title>TaskFlow — Smart Task Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main id="authView" class="auth-shell">
+    <section class="auth-brand">
+      <div class="brand-mark">✓</div><span class="brand-name">TaskFlow</span>
+      <div class="brand-copy"><p class="eyebrow">CLOUD-BASED SMART TASK MANAGEMENT</p>
+        <h1>Make space for<br><span>meaningful work.</span></h1>
+        <p>Plan clearly. Work together. Keep every deadline in sight.</p>
+      </div>
+      <div class="auth-foot">A cloud-powered workspace for your everyday tasks.</div>
+    </section>
+    <section class="auth-panel">
+      <div class="auth-card">
+        <div class="mobile-brand"><span class="brand-mark">✓</span><span class="brand-name">TaskFlow</span></div>
+        <p class="eyebrow" id="authEyebrow">WELCOME BACK</p><h2 id="authTitle">Sign in to your workspace</h2>
+        <p class="muted" id="authSubtitle">Enter your details to continue.</p>
+        <form id="authForm">
+          <div id="nameField" class="field hidden"><label for="fullName">Full name</label><input id="fullName" autocomplete="name" placeholder="Your full name"></div>
+          <div id="departmentField" class="field hidden"><label for="department">Department</label><input id="department" placeholder="e.g. Computer Science"></div>
+          <div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+          <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required minlength="6" placeholder="At least 6 characters"></div>
+          <button class="btn btn-primary full" id="authSubmit" type="submit">Sign in <span>→</span></button>
+        </form>
+        <p class="auth-switch" id="authSwitch">New to TaskFlow? <button id="toggleAuth" class="text-button">Create an account</button></p>
+        <p class="form-message" id="authMessage" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <div id="appView" class="app-shell hidden">
+    <aside class="sidebar">
+      <a class="brand-link" href="#"><span class="brand-mark">✓</span><span class="brand-name">TaskFlow</span></a>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="main-nav">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Overview</button>
+        <button class="nav-item" data-view="tasks"><span>☷</span> My tasks</button>
+        <button class="nav-item" data-view="assigned"><span>↗</span> Assigned to me</button>
+        <button class="nav-item" data-view="completed"><span>✓</span> Completed</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="profile-mini"><div class="avatar" id="sideAvatar">U</div><div class="profile-text"><strong id="sideName">User</strong><small id="sideEmail">user@email.com</small></div></div>
+        <button class="nav-item" id="profileButton"><span>⚙</span> Profile & settings</button>
+        <button class="nav-item signout" id="logoutButton"><span>↪</span> Sign out</button>
+      </div>
+    </aside>
+
+    <section class="main-area">
+      <header class="topbar"><div><p class="eyebrow" id="dateLabel">YOUR WORKSPACE</p><h2 id="pageTitle">Overview</h2></div>
+        <div class="top-actions"><div class="top-user"><div class="avatar" id="topAvatar">U</div><span id="topName">User</span></div><button class="btn btn-primary" id="newTaskButton">＋ New task</button></div>
+      </header>
+      <div class="content">
+        <section id="dashboardView" class="view">
+          <div class="welcome-row"><div><h3 id="welcomeTitle">Good day 👋</h3><p class="muted">Here's what's happening with your tasks.</p></div><span class="date-chip" id="todayDate"></span></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Total tasks</span><span class="stat-icon purple">▦</span></div><strong id="totalCount">0</strong><small>All your tasks</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Pending</span><span class="stat-icon amber">◷</span></div><strong id="pendingCount">0</strong><small>Waiting to start</small></article>
+            <article class="stat-card"><div class="stat-top"><span>In progress</span><span class="stat-icon blue">↗</span></div><strong id="progressCount">0</strong><small>Currently active</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div><strong id="completedCount">0</strong><small>Successfully finished</small></article>
+          </div>
+          <div class="dashboard-grid">
+            <section class="panel"><div class="panel-heading"><div><h3>Recent tasks</h3><p class="muted">Your latest activity</p></div><button class="text-button" data-go="tasks">View all →</button></div><div id="recentTasks" class="task-list"></div></section>
+            <section class="panel progress-panel"><div class="panel-heading"><div><h3>Task progress</h3><p class="muted">Completion overview</p></div></div><div class="progress-number"><strong id="completionPercent">0%</strong><span>completed</span></div><div class="progress-track"><div id="completionBar"></div></div><div class="progress-legend"><span><i class="dot dot-green"></i> Completed</span><span><i class="dot dot-purple"></i> Remaining</span></div><div class="overdue-note"><span>⚑</span><div><strong id="overdueCount">0 overdue tasks</strong><small>Keep an eye on approaching deadlines.</small></div></div></section>
+          </div>
+        </section>
+
+        <section id="tasksView" class="view hidden">
+          <div class="list-toolbar"><div><h3>All tasks</h3><p class="muted">Create and organize your work in one place.</p></div><button class="btn btn-primary" id="newTaskButton2">＋ Create task</button></div>
+          <div class="filters"><input id="searchInput" placeholder="⌕  Search tasks..." aria-label="Search tasks"><select id="statusFilter"><option value="">All statuses</option><option>To Do</option><option>In Progress</option><option>Completed</option></select><select id="priorityFilter"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></div>
+          <div id="taskList" class="task-list task-list-full"></div>
+        </section>
+        <section id="assignedView" class="view hidden"><div class="list-toolbar"><div><h3>Assigned to me</h3><p class="muted">Tasks assigned to your account.</p></div></div><div id="assignedList" class="task-list task-list-full"></div></section>
+        <section id="completedView" class="view hidden"><div class="list-toolbar"><div><h3>Completed tasks</h3><p class="muted">A record of work you've finished.</p></div></div><div id="completedList" class="task-list task-list-full"></div></section>
+        <section id="profileView" class="view hidden"><div class="panel profile-panel"><h3>Your profile</h3><p class="muted">Account information from your TaskFlow profile.</p><div class="profile-large"><div class="avatar avatar-large" id="profileAvatar">U</div><div><h3 id="profileName">User</h3><p id="profileEmail" class="muted"></p></div></div><div class="profile-details"><div><small>Full name</small><strong id="profileNameDetail">—</strong></div><div><small>Department</small><strong id="profileDepartment">—</strong></div><div><small>Account created</small><strong id="profileCreated">—</strong></div></div></div></section>
+      </div>
+    </section>
+  </div>
+
+  <dialog id="taskDialog" class="task-dialog"><form id="taskForm" method="dialog">
+    <div class="dialog-heading"><div><p class="eyebrow">TASK DETAILS</p><h2 id="dialogTitle">Create a task</h2></div><button type="button" class="close-button" id="closeDialog" aria-label="Close">×</button></div>
+    <input type="hidden" id="taskId">
+    <div class="field"><label for="taskTitle">Task title *</label><input id="taskTitle" required maxlength="100" placeholder="What needs to get done?"></div>
+    <div class="field"><label for="taskDescription">Description</label><textarea id="taskDescription" rows="3" placeholder="Add some details..."></textarea></div>
+    <div class="form-grid">
+      <div class="field"><label for="taskPriority">Priority</label><select id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select></div>
+      <div class="field"><label for="taskStatus">Status</label><select id="taskStatus"><option>To Do</option><option>In Progress</option><option>Completed</option></select></div>
+      <div class="field"><label for="taskCategory">Category</label><input id="taskCategory" placeholder="e.g. Academic"></div>
+      <div class="field"><label for="taskDueDate">Due date</label><input id="taskDueDate" type="date"></div>
+    </div>
+    <div class="field"><label for="taskAssigned">Assign to (email)</label><input id="taskAssigned" type="email" placeholder="Optional team member email"><small class="field-help">Leave blank to keep this task personal. Assignment is stored as an email address.</small></div>
+    <p id="taskMessage" class="form-message"></p><div class="dialog-actions"><button type="button" class="btn btn-quiet" id="cancelTask">Cancel</button><button type="submit" class="btn btn-primary" id="saveTask">Save task <span>→</span></button></div>
+  </form></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="js/app.js"></script>
+</body></html>

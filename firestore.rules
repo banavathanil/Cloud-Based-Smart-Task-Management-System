@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isOwner() { return signedIn() && resource.data.createdBy == request.auth.uid; }
+
+    match /users/{userId} {
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow read, update: if signedIn() && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    match /tasks/{taskId} {
+      // Task creators can read and manage their own tasks.
+      // A task assigned to a user is readable by that authenticated user.
+      allow read: if signedIn() &&
+        (resource.data.createdBy == request.auth.uid ||
+         resource.data.assignedToEmail == request.auth.token.email);
+
+      allow create: if signedIn() &&
+        request.resource.data.createdBy == request.auth.uid &&
+        request.resource.data.createdByEmail == request.auth.token.email;
+
+      // The creator may edit/delete. An assignee may update only the status.
+      allow update: if signedIn() &&
+        (isOwner() ||
+         (resource.data.assignedToEmail == request.auth.token.email &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','updatedAt'])));
+
+      allow delete: if isOwner();
+    }
+  }
+}
