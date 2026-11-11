@@ -1,28 +1,46 @@
-# Cloud-Based Smart Task Management System
 
-A responsive cloud-based task management web application prepared from the submitted Cloud Computing PBL report.
+# ☁️ Cloud-Based Smart Task Management System
 
-## Technology stack
-- HTML5, CSS3 and JavaScript (ES modules)
-- Firebase Authentication (Email/Password)
-- Cloud Firestore
-- Firebase Hosting
+A web-based task management application designed to help users organize, manage, track, and update their daily tasks using Firebase cloud services.
 
-## Features
-- User registration, sign-in and sign-out
-- User profile and department information
-- Dashboard statistics: total, pending, in-progress, completed and overdue tasks
-- Create, view, update and delete tasks
-- Priority, category, due date and task status
-- Assign tasks using a registered user's email address
-- Search and filter tasks
-- Assigned-to-me and completed task views
-- Responsive desktop and mobile layout
-- Firestore security rules
+## 🌐 Live Demo
 
-## Project structure
+**Live Website:** https://cloud-smart-task-management.web.app
+
+## 📌 Project Overview
+
+The Cloud-Based Smart Task Management System is designed to simplify task organization and improve productivity. Users can manage their tasks through an interactive web interface, with data stored in the cloud using Firebase Firestore.
+
+The application provides a centralized platform for managing tasks anytime and from anywhere with an internet connection.
+
+## ✨ Key Features
+
+- User Registration and Login
+- Secure Firebase Authentication
+- Create, View, Update and Delete Tasks
+- Cloud-based Task Storage
+- Task Priority Management
+- Task Categories and Deadlines
+- Task Status Tracking
+- Search and Filter Tasks
+- Responsive User Interface
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Web page structure |
+| CSS3 | Styling and responsive design |
+| JavaScript | Application functionality |
+| Firebase Authentication | User authentication |
+| Cloud Firestore | Cloud database |
+| Firebase Hosting | Website deployment |
+
+## 🏗️ Project Structure
+
 ```text
-cloud-based-smart-task-management-system/
+Cloud-Based-Smart-Task-Management-System/
+│
 ├── index.html
 ├── css/
 │   └── styles.css
@@ -31,84 +49,64 @@ cloud-based-smart-task-management-system/
 │   └── firebase.js
 ├── firestore.rules
 ├── firebase.json
-├── .firebaserc.example
 └── README.md
 ```
 
-## Setup
+## 🚀 Getting Started
 
-### 1. Create a Firebase project
-1. Open https://console.firebase.google.com/
-2. Create a project.
-3. Add a Web App from Project Overview.
-4. Copy the Firebase web configuration.
+### 1. Clone the Repository
 
-### 2. Enable Authentication
-1. Open **Build → Authentication**.
-2. Select **Get started**.
-3. Open **Sign-in method**.
-4. Enable **Email/Password** and save.
-
-### 3. Create Firestore
-1. Open **Build → Firestore Database**.
-2. Create a database.
-3. Choose a region suitable for your users.
-4. Open the Rules tab and publish the contents of `firestore.rules`.
-
-### 4. Configure the app
-Open `js/firebase.js` and replace each `YOUR_...` placeholder with the values from Firebase Project settings → General → Your apps.
-
-Do not commit private service-account keys or administrator credentials. The Firebase web config is intended for client-side use; protect data with correctly configured Firestore Security Rules.
-
-### 5. Run locally
-Because the app uses JavaScript modules, serve it through a local web server rather than opening `index.html` directly.
-
-For example, with Python installed:
 ```bash
-python -m http.server 5500
+git clone https://github.com/banavathanil/Cloud-Based-Smart-Task-Management-System.git
 ```
-Then open http://localhost:5500
 
-You can also use the VS Code Live Server extension.
+### 2. Open the Project
 
-### 6. Deploy with Firebase Hosting
-Install Node.js, then install the Firebase CLI:
 ```bash
-npm install -g firebase-tools
-firebase login
+cd Cloud-Based-Smart-Task-Management-System
 ```
-From this project folder:
+
+### 3. Configure Firebase
+
+- Create a Firebase project.
+- Register a Web App.
+- Enable Email/Password Authentication.
+- Create a Cloud Firestore database.
+- Add your Firebase configuration to `js/firebase.js`.
+- Publish the appropriate Firestore security rules.
+
+### 4. Run the Application
+
+Open `index.html` using a local development server, such as the VS Code Live Server extension.
+
+## ☁️ Deployment
+
+This project is deployed using Firebase Hosting.
+
+**Live URL:** https://cloud-smart-task-management.web.app
+
+To deploy your application again:
+
 ```bash
-firebase use --add
+firebase deploy --only hosting
 ```
-Select your Firebase project. Then deploy:
-```bash
-firebase deploy --only hosting,firestore:rules
-```
-The Hosting URL will be shown after deployment.
 
-## Firestore data model
+## 🔐 Security
 
-### `users/{uid}`
-- `uid`
-- `fullName`
-- `email`
-- `department`
-- `createdAt`
+- Firebase Authentication manages user sign-in.
+- Firestore Security Rules control database access.
+- Firebase configuration is stored in the client-side application.
+- Database access should be restricted through appropriate security rules.
 
-### `tasks/{taskId}`
-- `title`, `description`
-- `priority`: Low / Medium / High
-- `category`
-- `dueDate`
-- `status`: To Do / In Progress / Completed
-- `assignedToEmail`
-- `createdBy`, `createdByEmail`
-- `createdAt`, `updatedAt`
+## 👨‍💻 Developer
 
-## Notes and limitations
-- This is a runnable starter implementation based on the report's stated architecture and features. Firebase setup and deployment are required before cloud features work.
-- Task assignment uses the assignee's email address. The assignee must have an account using that email.
-- The project currently provides in-app task lists and overdue identification. Scheduled email/push reminders, calendar integration, AI prioritization and mobile apps are future enhancements listed in the report, not implemented features.
-- Test security rules with Firebase Emulator Suite before production use. Review access requirements carefully if you change the data model.
-- If you change Firestore rules, publish them in the Firebase console or deploy them using the Firebase CLI.
+**Banavath Anil**
+
+B.Tech – Computer Science and Engineering (Cyber Security)
+
+GitHub: https://github.com/banavathanil
+
+## 📄 License
+
+This project is developed for academic and educational purposes.
+
