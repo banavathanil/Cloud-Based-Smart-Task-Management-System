@@ -7,13 +7,20 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-aut
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+
+    apiKey: "AIzaSyDp53K6Nvken5IEQP0CAEoYkkhMRLsyC4Y",
+
+    authDomain: "cloud-smart-task-management.firebaseapp.com",
+
+    projectId: "cloud-smart-task-management",
+
+    storageBucket: "cloud-smart-task-management.firebasestorage.app",
+
+    messagingSenderId: "237842273696",
+
+    appId: "1:237842273696:web:c7fba50cd260270c5c00c5"
+
+  };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
